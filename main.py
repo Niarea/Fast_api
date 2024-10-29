@@ -77,3 +77,7 @@ async def predict(file: UploadFile = File(...)):
         "uncertainty": float(uncertainty),
         "processing_time": float(processing_time)
     }
+# Commande pour démarrer le serveur FastAPI
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
