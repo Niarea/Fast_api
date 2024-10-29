@@ -1,6 +1,7 @@
-tensorflow
-numpy
-fastapi
-uvicorn
-gunicorn
-PIL
+fastapi==0.115.3
+numpy==1.23.5
+Pillow==11.0.0
+scipy==1.14.1
+tensorflow==2.12.0
+uvicorn==0.32.0
+python-multipart
