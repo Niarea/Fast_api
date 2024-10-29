@@ -20,12 +20,12 @@ def read_root():
     return {"message": "API Dental Diseases Prediction"}
 
 # Charger le modèle ML (assurez-vous d'ajuster le chemin si nécessaire
-model = load_model('new_model2.h5')
+model = load_model('new_model2.keras')
 
 # Fonction pour pré-traiter l'image avant de la passer au modèle
 def preprocess_image(image: Image.Image) -> np.ndarray:
     image = image.convert("RGB")  # Assurez-vous que l'image a 3 canaux
-    image = image.resize((180, 180))  # Ajustez la taille selon votre modèle
+    image = image.resize((256, 256))  # Ajustez la taille selon votre modèle
     image = np.array(image) / 255.0    # Normalisation
     image = np.expand_dims(image, axis=0)  # Ajouter une dimension batch
     return image
