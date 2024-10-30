@@ -5,6 +5,7 @@ from scipy.stats import entropy
 import numpy as np
 import io
 import time
+from tensorflow.keras.layers import DepthwiseConv2D
 
 # Initialiser l'application FastAPI
 app = FastAPI(
@@ -19,8 +20,14 @@ app = FastAPI(
 def read_root():
     return {"message": "API Dental Diseases Prediction"}
 
-# Charger le modèle ML (assurez-vous d'ajuster le chemin si nécessaire
-model = load_model('keras_model.h5')
+# Définir la couche sans le paramètre 'groups'
+def custom_depthwise_conv2d(*args, **kwargs):
+    if 'groups' in kwargs:
+        del kwargs['groups']  # Retirer 'groups'
+    return DepthwiseConv2D(*args, **kwargs)
+
+# Charger le modèle
+model = load_model("models/keras_model.h5", custom_objects={'DepthwiseConv2D': custom_depthwise_conv2d}, compile=False)
 
 # Fonction pour pré-traiter l'image avant de la passer au modèle
 def preprocess_image(image):
