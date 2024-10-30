@@ -27,7 +27,7 @@ def custom_depthwise_conv2d(*args, **kwargs):
     return DepthwiseConv2D(*args, **kwargs)
 
 # Charger le modèle
-model = load_model("models/keras_model.h5", custom_objects={'DepthwiseConv2D': custom_depthwise_conv2d}, compile=False)
+model = load_model("keras_model.h5", custom_objects={'DepthwiseConv2D': custom_depthwise_conv2d}, compile=False)
 
 # Fonction pour pré-traiter l'image avant de la passer au modèle
 def preprocess_image(image):
