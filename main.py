@@ -27,7 +27,7 @@ def custom_depthwise_conv2d(*args, **kwargs):
     return DepthwiseConv2D(*args, **kwargs)
 
 # Charger le modèle
-model = load_model("keras_model.h5", custom_objects={'DepthwiseConv2D': custom_depthwise_conv2d}, compile=False)
+model = load_model("Model3.keras", compile=False)
 
 # Charger les étiquettes
 with open("labels.txt", "r") as file:
@@ -36,7 +36,7 @@ with open("labels.txt", "r") as file:
 # Fonction pour prétraiter l'image
 def preprocess(image):
     # Redimensionner l'image à 224x224
-    image = ImageOps.fit(image, (224, 224), Image.Resampling.LANCZOS)
+    image = ImageOps.fit(image, (180, 180), Image.Resampling.LANCZOS)
     
     # Convertir l'image en tableau numpy et s'assurer qu'elle a 3 canaux
     image_array = np.asarray(image.convert("RGB"), dtype=np.float32)
@@ -45,7 +45,7 @@ def preprocess(image):
     normalized_image_array = (image_array / 127.5) - 1
     
     # Créer le tableau de données pour le modèle
-    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+    data = np.ndarray(shape=(1, 180, 180, 3), dtype=np.float32)
     data[0] = normalized_image_array
 
     return data
